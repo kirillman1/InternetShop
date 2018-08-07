@@ -23,6 +23,8 @@
                 </ul>
             </nav>
         </header>
+
+        <%--<jsp:include page="/WEB-INF/template/product-list.jsp" />--%>
     </div>
 
     <footer class="footer"></footer>
