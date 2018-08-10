@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<f:metadata>
+    <!--забиндит значение из GETа в значение контроллера -->
+    <f:viewParam name="id" value="#{orderEditController.id}" />
+    <!--дергаем init метод из контроллера, когда все данные в контроллер переданы-->
+    <f:viewAction action="#{orderEditController.init}" />
+</f:metadata>
+
+<h:body>
+    <h1>EDIT ORDER</h1>
+    <h:form>
+        <p:outputPanel>
+            <p:outputLabel value="NAME"/>
+        </p:outputPanel>
+        <p:messages id="msg" />
+        <p:outputPanel>
+            <p:inputText value="#{orderEditController.order.name}" id="name" required="true" requiredMessage="ENTER NAME">
+                <p:ajax update="msg" event="keyup" />
+            </p:inputText>
+        </p:outputPanel>
+        <p:outputPanel>
+            <p:outputLabel value="DESCRIPTION"/>
+        </p:outputPanel>
+        <p:outputPanel>
+            <p:inputText value="#{orderEditController.order.description}"/>
+        </p:outputPanel>
+        <p:commandButton update="msg" value="SAVE" action="#{orderEditController.save}"/>
+        <p:button value="ORDERS" outcome="order-list"/>
+    </h:form>
+</h:body>
+</html>

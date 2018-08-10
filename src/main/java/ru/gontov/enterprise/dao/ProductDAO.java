@@ -15,10 +15,10 @@ public class ProductDAO {
 
     @PostConstruct
     private void init() {
-        merge(new Product("DEMO Product"));
+        merge(new Product("Example"));
     }
 
-    public Collection<Product> getProducts() {
+    public Collection<Product> getProductList() {
         return products.values();
     }
 
@@ -29,9 +29,9 @@ public class ProductDAO {
 
     public Product merge(Product product) {
         if (product == null) return null;
-        final String id = product.getId();
-        if (id == null || id.isEmpty()) return null;
-        products.put(id, product);
+        String productId = product.getId();
+        if (productId == null || productId.isEmpty()) return null;
+        products.put(productId, product);
         return product;
     }
 

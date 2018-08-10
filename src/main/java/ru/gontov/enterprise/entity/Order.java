@@ -1,19 +1,14 @@
 package ru.gontov.enterprise.entity;
 
-
 import java.util.UUID;
 
-public class Product {
+public class Order {
 
     private String id = UUID.randomUUID().toString();
     private String name = null;
     private String description = null;
 
-    public Product() {
-    }
-
-    public Product(String name) {
-        this.name = name;
+    public Order() {
     }
 
     public String getId() {
@@ -23,7 +18,6 @@ public class Product {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
