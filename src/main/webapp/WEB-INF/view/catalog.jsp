@@ -19,9 +19,12 @@
                     <li><a href="product">PRODUCT</a></li>
                     <li><a href="cart">CART</a></li>
                     <li><a href="order">ORDER</a></li>
+                    <li><a href="contacts">CONTACTS</a></li>
                 </ul>
             </nav>
         </header>
+
+        <%--<jsp:include page="/WEB-INF/template/product-list.jsp" />--%>
     </div>
 
     <footer class="footer"></footer>
