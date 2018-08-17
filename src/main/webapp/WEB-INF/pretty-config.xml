@@ -34,4 +34,9 @@
         <view-id value="/order-edit.xhtml"/>
     </url-mapping>
 
+    <url-mapping>
+        <pattern value="/" />
+        <view-id value="/index.xhtml"/>
+    </url-mapping>
+
 </pretty-config>

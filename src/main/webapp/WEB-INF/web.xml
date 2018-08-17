@@ -12,12 +12,12 @@
 
     <error-page>
         <error-code>403</error-code>
-        <location>/WEB-INF/view/error403.jsp</location>
+        <location>/error403</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/view/error404.jsp</location>
+        <location>/error404</location>
     </error-page>
 
 

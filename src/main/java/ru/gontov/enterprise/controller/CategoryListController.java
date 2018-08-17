@@ -19,7 +19,7 @@ public class CategoryListController {
         return categoryDAO.getCategoryList();
     }
 
-    public void removeCategoryById(String categoryId){
+    public void removeCategoryById(Long categoryId){
         categoryDAO.removeCategoryById(categoryId);
     }
 }

@@ -14,7 +14,7 @@ public class OrderEditController {
     @Inject
     OrderDAO orderDAO;
 
-    private String id;
+    private Long id;
     private Order order = new Order();
 
     public void init(){
@@ -27,19 +27,15 @@ public class OrderEditController {
         return "order-list";
     }
 
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
-
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
     public Order getOrder() {
         return order;
     }
-
     public void setOrder(Order order) {
         this.order = order;
     }

@@ -2,41 +2,35 @@ package ru.gontov.enterprise.dao;
 
 import ru.gontov.enterprise.entity.Order;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.ejb.Stateless;
+import java.util.List;
 
-@ApplicationScoped
-public class OrderDAO {
+@Stateless
+public class OrderDAO extends AbstractDAO {
 
-    private Map<String, Order> orders = new LinkedHashMap<>();
-
-    @PostConstruct
-    private void init(){
-        merge(new Order());
+    public List<Order> getOrderList() {
+        return entityManager.createQuery("SELECT e FROM Order e ORDER BY e.created DESC", Order.class).getResultList();
     }
 
-    public Collection<Order> getOrderList(){
-        return orders.values();
+    public Order getOrderById(Long id) {
+        if (id == null) return null;
+        return entityManager.find(Order.class, id);
     }
 
-    public Order merge(Order order){
+    public Order persist(Order order) {
         if (order == null) return null;
-        String orderId = order.getId();
-        if (orderId == null || orderId.isEmpty()) return null;
-        orders.put(orderId, order);
+        entityManager.persist(order);
         return order;
     }
 
-    public Order getOrderById(String orderId){
-        if (orderId == null || orderId.isEmpty()) return null;
-        return orders.get(orderId);
+    public Order merge(Order order) {
+        if (order == null) return null;
+        return entityManager.merge(order);
     }
 
-    public void removeOrderById(String orderId){
-        if (orderId == null || orderId.isEmpty() || !orders.containsKey(orderId)) return;
-        orders.remove(orderId);
+    public void removeOrderById(Long id) {
+        Order order = getOrderById(id);
+        if (id == null) return;
+        entityManager.remove(order);
     }
 }

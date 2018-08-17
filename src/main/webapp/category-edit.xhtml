@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+    <h:outputStylesheet library="css" name="main.css"  />
 </h:head>
 
 <f:metadata>
@@ -20,23 +20,31 @@
 <h:body>
     <h1>EDIT CATEGORY</h1>
     <h:form>
+        <p:fieldset legend="EDIT TASK">
+            <p:spacer height="5" />
+            <p:outputPanel>
+                <p:outputLabel value="NAME"/>
+            </p:outputPanel>
+            <p:messages id="msg" />
+            <p:outputPanel>
+                <p:inputText value="#{categoryEditController.category.name}" id="name" required="true" requiredMessage="ENTER NAME">
+                    <p:ajax update="msg" event="keyup" />
+                </p:inputText>
+            </p:outputPanel>
+            <p:outputPanel>
+                <p:outputLabel value="DESCRIPTION"/>
+            </p:outputPanel>
+            <p:outputPanel>
+                <p:inputText value="#{categoryEditController.category.description}"/>
+            </p:outputPanel>
+            <p:spacer height="5" />
+        </p:fieldset>
+        <p:spacer height="20" />
         <p:outputPanel>
-            <p:outputLabel value="NAME"/>
+            <p:commandButton update="msg" value="SAVE" action="#{categoryEditController.save}" />
+            <p:spacer width="20" />
+            <p:button value="CATEGORIES" outcome="category-list"/>
         </p:outputPanel>
-        <p:messages id="msg" />
-        <p:outputPanel>
-            <p:inputText value="#{categoryEditController.category.name}" id="name" required="true" requiredMessage="ENTER NAME">
-                <p:ajax update="msg" event="keyup" />
-            </p:inputText>
-        </p:outputPanel>
-        <p:outputPanel>
-            <p:outputLabel value="DESCRIPTION"/>
-        </p:outputPanel>
-        <p:outputPanel>
-            <p:inputText value="#{categoryEditController.category.description}"/>
-        </p:outputPanel>
-        <p:commandButton update="msg" value="SAVE" action="#{categoryEditController.save}"/>
-        <p:button value="CATEGORIES" outcome="category-list"/>
     </h:form>
 </h:body>
 </html>

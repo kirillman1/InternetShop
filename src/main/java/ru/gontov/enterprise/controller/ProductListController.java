@@ -15,11 +15,22 @@ public class ProductListController {
     @Inject
     ProductDAO productDAO;
 
+    private Long categoryId;
+
     public Collection<Product> getProductList(){
-        return productDAO.getProductList();
+        if (categoryId == null) return productDAO.getProductList();
+        return productDAO.getListProductByCategoryId(categoryId);
     }
 
-    public void removeProductById (String productId) {
+    public void removeProductById (Long productId) {
         productDAO.removeProductById(productId);
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

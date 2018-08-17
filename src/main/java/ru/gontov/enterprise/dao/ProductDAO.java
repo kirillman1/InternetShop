@@ -1,44 +1,53 @@
 package ru.gontov.enterprise.dao;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import ru.gontov.enterprise.entity.Product;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.ejb.Stateless;
+import java.util.Collections;
+import java.util.List;
 
-@ApplicationScoped
-public class ProductDAO {
+@Stateless
+public class ProductDAO extends AbstractDAO {
 
-    private Map<String, Product> products = new LinkedHashMap<>();
-
-    @PostConstruct
-    private void init() {
-        merge(new Product("Example"));
+    public List<Product> getProductList (){
+        return entityManager.createQuery("SELECT e FROM Product e ORDER BY e.created DESC", Product.class).getResultList();
     }
 
-    public Collection<Product> getProductList() {
-        return products.values();
+    public Product getProductById(Long id){
+        if (id == null) return null;
+        return entityManager.find(Product.class, id);
     }
 
-    public Product getProductById(String productId) {
-        if (productId == null || productId.isEmpty()) return null;
-        return products.get(productId);
+    @NotNull
+    public List<Product> getListProductByCategoryId(@Nullable final Long categoryId) {
+        if (categoryId == null) return Collections.emptyList();
+        return entityManager.createQuery("SELECT e FROM Product e WHERE e.category.id = :categoryId ORDER BY e.created", Product.class)
+                .setParameter("categoryId", categoryId).getResultList();
     }
 
-    public Product merge(Product product) {
+    @NotNull
+    public List<Product> getListProductByOrderId(@Nullable final Long orderId) {
+        if (orderId == null) return Collections.emptyList();
+        return entityManager.createQuery("SELECT e FROM Product e WHERE e.order.id = :orderId ORDER BY e.created", Product.class)
+                .setParameter("orderId", orderId).getResultList();
+    }
+
+    public Product persist (Product product){
         if (product == null) return null;
-        String productId = product.getId();
-        if (productId == null || productId.isEmpty()) return null;
-        products.put(productId, product);
+        entityManager.persist(product);
         return product;
     }
 
-    public void removeProductById(String productId) {
-        if (productId == null || productId.isEmpty()) return;
-        if (!products.containsKey(productId)) return;
-        products.remove(productId);
+    public Product merge(Product product) {
+        if (product == null)return null;
+        return entityManager.merge(product);
     }
 
+    public void removeProductById(Long id){
+        Product product = getProductById(id);
+        if (id == null) return;
+        entityManager.remove(product);
+    }
 }

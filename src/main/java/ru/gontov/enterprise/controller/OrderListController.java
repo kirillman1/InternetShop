@@ -19,7 +19,7 @@ public class OrderListController {
         return orderDAO.getOrderList();
     }
 
-    public void removeOrderById(String orderId){
+    public void removeOrderById(Long orderId){
         orderDAO.removeOrderById(orderId);
     }
 }
