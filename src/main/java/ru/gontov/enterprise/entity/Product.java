@@ -1,29 +1,32 @@
 package ru.gontov.enterprise.entity;
 
 
-import java.util.UUID;
+import org.jetbrains.annotations.Nullable;
 
-public class Product {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
-    private String id = UUID.randomUUID().toString();
+@Entity
+public class Product extends AbstractEntity {
+
+    @Column
+    @Nullable
     private String name = null;
+
+    @Column
+    @Nullable
     private String description = null;
+
+    @ManyToOne
+    private Category category;
 
     public Product() {
     }
 
-    public Product(String name) {
+    public Product(@Nullable String name) {
         this.name = name;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
 
     public String getName() {
         return name;
@@ -39,5 +42,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -14,26 +14,26 @@ public class CategoryEditController {
     @Inject
     private CategoryDAO categoryDAO;
 
-    private String id;
+    private Long id;
     private Category category = new Category();
 
-    public void init(){
+    public void init() {
         Category category = categoryDAO.getCategoryById(id);
 
         //чтобы контроллер мог и редактировать и создавать новую категорию
         if (category != null) this.category = category;
     }
 
-    public String save(){
+    public String save() {
         categoryDAO.merge(category);
         return "category-list";
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,22 +1,29 @@
 package ru.gontov.enterprise.entity;
 
-import java.util.UUID;
+import org.jetbrains.annotations.Nullable;
 
-public class Order {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
-    private String id = UUID.randomUUID().toString();
+@Entity
+public class Order extends AbstractEntity {
+
+    @Column
+    @Nullable
     private String name = null;
+
+    @Column
+    @Nullable
     private String description = null;
 
+    @Column
+    @OneToMany
+    private List<Product> products = new ArrayList<>();
+
     public Order() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -33,5 +40,13 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

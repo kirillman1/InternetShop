@@ -1,26 +1,35 @@
 package ru.gontov.enterprise.entity;
 
-import java.util.UUID;
+import org.jetbrains.annotations.Nullable;
 
-public class Category {
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    private String id = UUID.randomUUID().toString();
-    private String name = null;
-    private String description = null;
+/**
+ * Entity бины - это классы, которые превращаются в таблицы базы данных
+ * при деплойменте приложения на сервер приложений
+ */
+@Entity
+public class Category extends AbstractEntity {
+
+    @Column
+    @Nullable
+    private String name = "";
+
+    @Column
+    @Nullable
+    private String description = "";
+
+    @Column
+    @OneToMany
+    private List<Product> products = new ArrayList<>();
 
     public Category() {
     }
 
-    public Category(String name) {
+    public Category(@Nullable String name) {
         this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -37,5 +46,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

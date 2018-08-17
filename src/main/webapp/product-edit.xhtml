@@ -7,12 +7,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
+    <h:outputStylesheet library="css" name="main.css"  />
 </h:head>
 
 <f:metadata>
     <!--забиндит значение из GETа в значение контроллера -->
     <f:viewParam name="id" value="#{productEditController.id}" />
+    <f:viewParam name="categoryId" value="#{productEditController.categoryId}" />
     <!--дергаем init метод из контроллера, когда все данные в контроллер переданы-->
     <f:viewAction action="#{productEditController.init}" />
 </f:metadata>
